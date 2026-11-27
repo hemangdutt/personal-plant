@@ -67,7 +67,9 @@ const handleAnalyze = async () => {
     // Use the Express API so the trained model, Gemini fallback, and
     // evidence-grounded fallback all follow the same server-side pipeline.
     const imageBase64 = await fileToBase64(selectedFile);
-    const response = await fetch('/api/analyze-leaf', {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
+const response = await fetch(`${API_BASE_URL}/api/analyze-leaf`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
